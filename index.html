@@ -1,149 +1,91 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>デュエマシティ・アーカイブ (仮)</title>
-    <style>
-        body {
-            margin: 0; font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
-            color: #334155; padding-bottom: 80px;
-        }
-        header { background-color: #0284c7; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        .nav-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-        .nav-link { background-color: rgba(15, 23, 42, 0.85); color: #f8fafc; text-decoration: none; padding: 10px 15px; border-radius: 6px; font-weight: bold; font-size: 0.9em; }
-
-        /* 📦 メインレイアウト（プログラムから幅や順序を制御できるように設定） */
-        .main-container {
-            display: flex; flex-direction: column; max-width: 1400px; margin: 20px auto; padding: 0 15px; gap: 20px;
-        }
-        @media (min-width: 768px) {
-            .main-container { flex-direction: row; }
-        }
-
-        /* 各ブロックの基本デザイン */
-        .block-box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.3s ease; }
-        
-        #leftMenuBlock { border-top: 4px solid #0284c7; }
-        #centerContentBlock { border-top: 4px solid #ef4444; }
-        #rightSidebarBlock { border-top: 4px solid #f59e0b; }
-
-        .official-link { display:block; background-color: rgba(30, 41, 59, 0.9); color: #38bdf8; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: bold; text-align: center; border: 1px solid #0284c7; margin-bottom: 10px; }
-        .notice-board { background: #fef2f2; border-left: 5px solid #ef4444; padding: 10px; border-radius: 6px; margin-bottom: 15px; }
-        .calendar-box { border: 2px dashed #cbd5e1; padding: 20px; text-align: center; color: #64748b; border-radius: 8px; font-weight: bold; }
-        .info-list { list-style: none; padding: 0; margin: 0; font-size: 0.9em; }
-        .info-list li { padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
-        .date-badge { background-color: #f59e0b; color: white; padding: 2px 6px; border-radius: 4px; margin-right: 5px; font-size: 0.8em; }
-
-        /* 🛠️ 【新設】画面下部に固定されるスリムな管理人用レイアウトコントローラー */
-        .layout-controller {
-            position: fixed; bottom: 0; left: 5%; right: 5%; width: 90%;
-            background: rgba(15, 23, 42, 0.95); color: white; padding: 8px 12px;
-            border-radius: 10px 10px 0 0; z-index: 1000; font-size: 0.8em;
-            display: flex; flex-direction: column; gap: 6px; box-sizing: border-box;
-        }
-        .ctrl-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-        .ctrl-group { display: flex; align-items: center; gap: 10px; }
-        .ctrl-btn { background: #0284c7; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-weight: bold; cursor: pointer; }
-        .ctrl-btn:hover { background: #0369a1; }
-        input[type="range"] { width: 80px; accent-color: #0284c7; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デュエマシティ・アーカイブ</title>
+<style>
+body{margin:0;font-family:sans-serif;background:linear-gradient(135deg,#e0f2fe 0%,#f0fdf4 100%);color:#334155;}
+header{background:#0284c7;color:#fff;padding:15px 10px;text-align:center;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+header h1{margin:0;font-size:1.4em;}
+header p{margin:5px 0 0;font-size:0.85em;opacity:0.9;}
+.nav-container{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.nav-link{background:rgba(15,23,42,0.85);color:#f8fafc;text-decoration:none;padding:8px 12px;border-radius:6px;font-weight:bold;font-size:0.8em;}
+.main-container{display:flex;flex-direction:row;max-width:1400px;margin:15px auto;padding:0 6px;gap:6px;}
+.left-menu{flex:1;border-top:4px solid #0284c7;}
+.center-content{flex:2;}
+.right-sidebar{flex:1.3;border-top:4px solid #f59e0b;}
+@media(min-width:768px){
+.main-container{gap:15px;padding:0 20px;}
+.left-menu{flex:1;}.center-content{flex:2.3;}.right-sidebar{flex:1.2;}.block-box{padding:15px;}
+.official-link{font-size:0.95em;}.mini-calendar th,.mini-calendar td{padding:6px 2px;font-size:0.85em;}
+}
+.block-box{background:#fff;padding:6px;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.02);box-sizing:border-box;display:flex;flex-direction:column;gap:8px;}
+.block-title{margin:0;font-size:0.8em;font-weight:bold;text-align:center;border-bottom:2px solid #e2e8f0;padding-bottom:4px;}
+.official-link{display:block;background:rgba(30,41,59,0.9);color:#38bdf8;text-decoration:none;padding:10px 2px;border-radius:4px;font-weight:bold;text-align:center;border:1px solid #0284c7;font-size:0.7em;white-space:nowrap;text-overflow:ellipsis;}
+.notice-board{background:#fef2f2;border-left:4px solid #ef4444;padding:10px;border-radius:6px;}
+.notice-board h3{margin:0 0 5px;font-size:0.85em;color:#ef4444;}
+.notice-item{font-size:0.75em;line-height:1.4;}
+.notice-date{font-weight:bold;color:#ef4444;display:block;margin-bottom:2px;}
+.thread-intro-box{background:#fff;padding:10px;border-radius:6px;border-top:3px solid #ef4444;}
+.thread-intro-box h2{margin:0 0 5px;font-size:0.95em;color:#b91c1c;}
+.thread-intro-box p{font-size:0.75em;line-height:1.5;margin:0;}
+.mini-calendar{width:100%;border-collapse:collapse;font-size:0.65em;text-align:center;margin-top:5px;}
+.mini-calendar th,.mini-calendar td{padding:4px 1px;font-weight:bold;}
+.mini-calendar th:first-child{color:#ef4444;}.mini-calendar th:last-child{color:#3b82f6;}
+.event-active{background-color:#fef3c7;color:#d97706;border-radius:4px;box-shadow:inset 0 0 0 1px #f59e0b;}
+.release-active{background-color:#2563eb;color:#fff;border-radius:4px;box-shadow:0 2px 4px rgba(37,99,235,0.3);}
+.info-list{list-style:none;padding:0;margin:0;font-size:0.7em;}
+.info-list li{padding:4px 0;border-bottom:1px solid #e2e8f0;line-height:1.3;}
+.date-badge{background-color:#2563eb;color:#fff;padding:1px 3px;border-radius:3px;font-size:0.8em;display:inline-block;}
+</style>
 </head>
 <body>
-
-    <header>
-        <h1>デュエマシティ・アーカイブ</h1>
-        <p>デュエプレ最新情報＆コミュニティ（非公式ファンサイト）</p>
-        <div class="nav-container">
-            <a href="index.html" class="nav-link">トップページ</a>
-            <a href="balance.html" class="nav-link">能力調整まとめ</a>
-            <a href="bbs.html" class="nav-link">コミュニティ掲示板</a>
-        </div>
-    </header>
-
-    <!-- メイン容器 -->
-    <div class="main-container" id="mainContainer">
-        
-        <!-- 【左側ブロック】公式リンク -->
-        <nav class="block-box" id="leftMenuBlock" style="flex: 1; order: 1;">
-            <h3 style="margin-top:0; font-size:1.1em; color:#0284c7;">🔗 公式リンク</h3>
-            <a href="https://takaratomy.co.jp" target="_blank" class="official-link">公式カードリスト ↗</a>
-            <a href="https://takaratomy.co.jp" target="_blank" class="official-link">公式Q&A ↗</a>
-        </nav>
-
-        <!-- 【中央ブロック】最新通知＆挨拶 -->
-        <div class="block-box" id="centerContentBlock" style="flex: 2; order: 2;">
-            <div class="notice-board">
-                <h4 style="margin-top: 0; color:#ef4444;">🔔 最新アップデート</h4>
-                <div style="font-size: 0.9em;"><span style="font-weight:bold;">2026/09/17</span> 能力調整アナウンスを公開！</div>
-            </div>
-            <h2 style="margin-top:0; font-size: 1.3em;">デュエマシティ・アーカイブへようこそ</h2>
-            <p style="font-size: 0.9em; line-height: 1.5;">デュエプレの歴史をストックし、決闘者が集う非公式ファンサイトです。</p>
-        </div>
-
-        <!-- 【右側ブロック】カレンダー＆ガチャ -->
-        <div class="block-box" id="rightSidebarBlock" style="flex: 1.2; order: 3;">
-            <h3 style="margin-top:0; font-size:1.1em; color:#f59e0b;">📅 スケジュール</h3>
-            <div class="calendar-box">[ カレンダーエリア ]</div>
-            <h3 style="font-size:1.1em; color:#f59e0b; margin-top:15px;">🚀 ガチャ日</h3>
-            <ul class="info-list">
-                <li><span class="date-badge">NEW</span> 21弾カードパック</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <!-- 🛡️ 管理人専用レイアウトコントローラー（画面上に直接表示されます） -->
-    <div class="layout-controller">
-        <div class="ctrl-row">
-            <span style="font-weight:bold; color:#38bdf8;">🛠️ 管理人レイアウト調整機能</span>
-            <span style="font-size:0.8em; color:#94a3b8;">※変更はブラウザを閉じるとリセットされます</span>
-        </div>
-        
-        <!-- サイズ調整用のスライダー -->
-        <div class="ctrl-row">
-            <div class="ctrl-group">
-                <span>左枠幅:</span>
-                <input type="range" min="1" max="4" step="0.1" value="1" oninput="changeSize('leftMenuBlock', this.value)">
-            </div>
-            <div class="ctrl-group">
-                <span>中央幅:</span>
-                <input type="range" min="1" max="4" step="0.1" value="2" oninput="changeSize('centerContentBlock', this.value)">
-            </div>
-            <div class="ctrl-group">
-                <span>右枠幅:</span>
-                <input type="range" min="1" max="4" step="0.1" value="1.2" oninput="changeSize('rightSidebarBlock', this.value)">
-            </div>
-        </div>
-
-        <!-- 並び順の入れ替えボタン -->
-        <div class="ctrl-row" style="border-top: 1px solid #334155; padding-top: 4px;">
-            <span>並び順の入れ替え:</span>
-            <div class="ctrl-group">
-                <button class="ctrl-btn" onclick="swapOrder('leftMenuBlock')">左を右へ</button>
-                <button class="ctrl-btn" onclick="swapOrder('centerContentBlock')">中央を右へ</button>
-                <button class="ctrl-btn" onclick="swapOrder('rightSidebarBlock')">右を左へ</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 調整機能を動かすJavaScriptプログラム -->
-    <script>
-        // サイズ（幅の比率）をリアルタイムに変更する関数
-        function changeSize(blockId, val) {
-            document.getElementById(blockId).style.flex = val;
-        }
-
-        // 位置（表示順序）をローテーションで入れ替える関数
-        function swapOrder(blockId) {
-            const block = document.getElementById(blockId);
-            let currentOrder = parseInt(block.style.order) || 1;
-            
-            // 1➔2➔3➔1 と順番をローテーションさせる
-            currentOrder = currentOrder >= 3 ? 1 : currentOrder + 1;
-            block.style.order = currentOrder;
-        }
-    </script>
+<header>
+<h1>デュエマシティ・アーカイブ</h1>
+<p>デュエプレ最新情報＆コミュニティ（非公式ファンサイト）</p>
+<div class="nav-container">
+<a href="index.html" class="nav-link">トップページ</a>
+<a href="balance.html" class="nav-link">能力調整まとめ</a>
+<a href="bbs.html" class="nav-link">コミュニティ掲示板</a>
+</div>
+</header>
+<div class="main-container">
+<nav class="block-box left-menu">
+<h3 class="block-title" style="color:#0284c7;">🌐 公式リンク</h3>
+<a href="https://dmps.takaratomy.co.jp/card/" target="_blank" class="official-link">カードリスト ↗</a>
+<a href="https://dmps.takaratomy.co.jp/faq-cardrule" target="_blank" class="official-link">公式Q&A ↗</a>
+</nav>
+<div class="center-content" style="display:flex;flex-direction:column;gap:6px;">
+<section class="notice-board">
+<h3>🔔 最新アプデ通知</h3>
+<div class="notice-item"><span class="notice-date">2026/09/24</span>次回、第37弾カードパック『虹帝∞命動 -FINAL ORAORA RINGFINITY!!-』 リリース！</div>
+</section>
+<section class="thread-intro-box">
+<h2>決闘者の皆さんへ</h2>
+<p>デュエプレを通じて、交流を深めることを目的とした非公式ファンサイトです。上のメニューから掲示板に参加できます！</p>
+</section>
+</div>
+<div class="block-box right-sidebar">
+<section style="display:flex;flex-direction:column;gap:2px;">
+<h3 class="block-title" style="color:#f59e0b;">📅 スケジュール</h3>
+<table class="mini-calendar">
+<thead><tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr></thead>
+<tbody>
+<tr><td></td><td></td><td class="event-active">1</td><td class="event-active">2</td><td class="event-active">3</td><td class="event-active">4</td><td class="event-active">5</td></tr>
+<tr><td class="event-active">6</td><td class="event-active">7</td><td class="event-active">8</td><td class="event-active">9</td><td class="event-active">10</td><td class="event-active">11</td><td class="event-active">12</td></tr>
+<tr><td class="event-active">13</td><td class="event-active">14</td><td class="event-active">15</td><td class="event-active">16</td><td class="event-active">17</td><td class="event-active">18</td><td class="event-active">19</td></tr>
+<tr><td class="event-active">20</td><td class="event-active">21</td><td class="event-active">22</td><td class="event-active">23</td><td class="release-active">24</td><td>25</td><td>26</td></tr>
+<tr><td>27</td><td>28</td><td>29</td><td>30</td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+</section>
+<section style="display:flex;flex-direction:column;gap:2px;">
+<ul class="info-list">
+<li><span class="date-badge">24日</span><br><b>新弾リリース日！</b></li>
+</ul>
+</section>
+</div>
+</div>
 </body>
 </html>
