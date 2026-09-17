@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>デュエマシティ・アーカイブ (仮)</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+            color: #334155;
+        }
+        header {
+            background-color: #0284c7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .nav-link {
+            background-color: rgba(15, 23, 42, 0.85);
+            color: #f8fafc;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .nav-link:hover {
+            background-color: rgba(2, 132, 199, 0.9);
+        }
+        .main-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+            gap: 25px;
+        }
+        .left-menu {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 400px;
+        }
+        .menu-group { display: flex; flex-direction: column; gap: 10px; }
+        .official-link {
+            background-color: rgba(30, 41, 59, 0.9);
+            color: #38bdf8;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            border: 1px solid #0284c7;
+        }
+        .official-link:hover { background-color: #0284c7; color: white; }
+        .center-content { flex: 2; display: flex; flex-direction: column; gap: 25px; }
+        .notice-board {
+            background: #fff;
+            border-left: 5px solid #ef4444;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .notice-item { margin: 5px 0; padding: 8px; background: #fef2f2; border-radius: 6px; font-size: 0.95em; }
+        .notice-date { font-weight: bold; color: #ef4444; margin-right: 10px; }
+        .article-area {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            min-height: 200px;
+        }
+        .right-sidebar { flex: 1.2; display: flex; flex-direction: column; gap: 25px; }
+        .calendar-area {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid #0284c7;
+        }
+        .calendar-box {
+            border: 2px dashed #cbd5e1;
+            padding: 30px;
+            text-align: center;
+            color: #64748b;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .gacha-area {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #f59e0b;
+        }
+        .info-list { list-style: none; padding: 0; margin: 0; }
+        .info-list li { padding: 10px 0; border-bottom: 1px solid #e2e8f0; }
+        .date-badge { font-size: 0.85em; background-color: #f59e0b; color: white; padding: 2px 6px; border-radius: 4px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>デュエマシティ・アーカイブ</h1>
+        <p>デュエプレ最新情報＆コミュニティ（非公式ファンサイト）</p>
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">トップページ</a>
+            <a href="balance.html" class="nav-link">能力調整まとめ</a>
+            <a href="bbs.html" class="nav-link">コミュニティ掲示板</a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <nav class="left-menu">
+            <div class="menu-group">
+                <a href="https://takaratomy.co.jp" target="_blank" class="official-link">🌐 公式カードリスト ↗</a>
+                <p style="font-size: 0.85em; color: #64748b; margin: 5px 0 0 5px;">※公式サイトが別タブで開きます</p>
+            </div>
+            <div class="menu-group"></div>
+            <div class="menu-group">
+                <a href="https://takaratomy.co.jp" target="_blank" class="official-link">❓ 公式よくある質問・Q&A ↗</a>
+            </div>
+        </nav>
+
+        <div class="center-content">
+            <section class="notice-board">
+                <h3 style="margin-top: 0;">🔔 最新アップデート・通知</h3>
+                <div class="notice-item">
+                    <span class="notice-date">2026/09/17</span>【メンテナンス】次回アップデート時の能力調整アナウンスが入りました！
+                </div>
+            </section>
+
+            <main class="article-area">
+                <h2>デュエマシティ・アーカイブへようこそ</h2>
+                <p>このサイトは、デュエプレの歴史や運営アナウンスを分かりやすくストックし、プレイヤー同士の交流を深めるための非公式ファンサイトです。</p>
+            </main>
+        </div>
+
+        <div class="right-sidebar">
+            <section class="calendar-area">
+                <h3 style="margin-top: 0;">📅 スケジュールカレンダー</h3>
+                <div class="calendar-box">
+                    [ ここにイベント期間の<br>カレンダー表が入ります ]
+                </div>
+            </section>
+
+            <section class="gacha-area">
+                <h3 style="margin-top: 0;">🚀 最新ガチャ実装日</h3>
+                <ul class="info-list">
+                    <li><span class="date-badge">NEW</span> 2026/09/XX<br>第XX弾カードパック</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+</body>
+</html>

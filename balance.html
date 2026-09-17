@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>能力調整まとめ - デュエマシティ・アーカイブ</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+            color: #334155;
+        }
+        header {
+            background-color: #0284c7;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .nav-link {
+            background-color: rgba(15, 23, 42, 0.85);
+            color: #f8fafc;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .balance-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+        h2 { color: #0369a1; border-bottom: 3px solid #0284c7; padding-bottom: 5px; }
+        .timeline { position: relative; margin: 20px 0; padding-left: 30px; border-left: 4px solid #bae6fd; }
+        .timeline-item { position: relative; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); margin-bottom: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: -38px; top: 24px; width: 12px; height: 12px; background-color: #0284c7; border: 4px solid #fff; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .timeline-date { font-weight: bold; color: #64748b; font-size: 0.9em; margin-bottom: 5px; }
+        .env-badge { background-color: #0284c7; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-left: 10px; }
+        .official-notice-btn {
+            display: inline-block; background-color: rgba(30, 41, 59, 0.9); color: #38bdf8; text-decoration: none;
+            padding: 8px 15px; border-radius: 6px; font-weight: bold; font-size: 0.9em; margin-top: 10px; border: 1px solid #0284c7;
+        }
+        .official-notice-btn:hover { background-color: #0284c7; color: white; }
+        .card-adjustment { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-top: 15px; }
+        .card-name { font-weight: bold; font-size: 1.1em; color: #1e293b; border-bottom: 2px solid #cbd5e1; padding-bottom: 4px; margin-bottom: 10px; display: flex; justify-content: space-between; }
+        .type-badge { font-size: 0.75em; padding: 2px 6px; border-radius: 4px; color: white; }
+        .nerf { background-color: #ef4444; }
+        .buff { background-color: #10b981; }
+        .compare-box { display: flex; flex-direction: column; gap: 8px; font-size: 0.95em; }
+        .compare-row { display: flex; padding: 4px 0; }
+        .compare-label { width: 70px; font-weight: bold; color: #64748b; }
+        .change-text { flex: 1; }
+        .arrow { color: #94a3b8; margin: 0 8px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>デュエマシティ・アーカイブ</h1>
+        <p>カード能力調整（バフ・ナーフ）の歴史</p>
+        <div class="nav-container">
+            <a href="index.html" class="nav-link">トップページ</a>
+            <a href="balance.html" class="nav-link">能力調整まとめ</a>
+            <a href="bbs.html" class="nav-link">コミュニティ掲示板</a>
+        </div>
+    </header>
+
+    <div class="balance-container">
+        <h2>⚖️ 能力調整の歴史タイムライン</h2>
+        <p>これまでにデュエプレ内で行われたカードのバランス調整の記録です（最新順）。</p>
+
+        <div class="timeline">
+            <!-- 【追加位置】新しい調整が来たらこの真下に追記 -->
+
+            <div class="timeline-item">
+                <div class="timeline-date">2026年09月17日 <span class="env-badge">第26弾環境</span></div>
+                <h3>ゲームバランス適正化のための調整</h3>
+                <a href="https://takaratomy.co.jp" target="_blank" class="official-notice-btn">🌐 公式サイトの告知ページを見る ↗</a>
+                <div class="card-adjustment">
+                    <div class="card-name"><span>超次元〇〇・ホール</span><span class="type-badge nerf">ナーフ</span></div>
+                    <div class="compare-box">
+                        <div class="compare-row"><span class="compare-label">コスト</span><span class="change-text">5 <span class="arrow">➔</span> <strong style="color:#ef4444;">6</strong></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
