@@ -6,83 +6,48 @@
     <title>デュエマシティ・アーカイブ (仮)</title>
     <style>
         body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
+            margin: 0; font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
-            color: #334155;
+            color: #334155; padding-bottom: 80px;
         }
-        header {
-            background-color: #0284c7;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* 🧭 ナビゲーションリンク（リンクが切れないよう相対パスに設定） */
+        header { background-color: #0284c7; color: white; padding: 20px; text-align: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
         .nav-container { display: flex; justify-content: center; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-        .nav-link {
-            background-color: rgba(15, 23, 42, 0.85);
-            color: #f8fafc; text-decoration: none;
-            padding: 10px 15px; border-radius: 6px; font-weight: bold; font-size: 0.9em;
-        }
+        .nav-link { background-color: rgba(15, 23, 42, 0.85); color: #f8fafc; text-decoration: none; padding: 10px 15px; border-radius: 6px; font-weight: bold; font-size: 0.9em; }
 
-        /* 📦 メインレイアウト（スマホ環境では自動で縦並びに変化する設計） */
+        /* 📦 メインレイアウト（プログラムから幅や順序を制御できるように設定） */
         .main-container {
-            display: flex;
-            flex-direction: column; /* ★縦並びを基本に（PCや大画面では横並びになります） */
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 15px;
-            gap: 20px;
+            display: flex; flex-direction: column; max-width: 1400px; margin: 20px auto; padding: 0 15px; gap: 20px;
         }
-
-        /* 大画面（タブレットやPC）での並び方とサイズ調整 */
         @media (min-width: 768px) {
-            .main-container {
-                flex-direction: row; /* 横並びにする */
-            }
+            .main-container { flex-direction: row; }
         }
 
-        /* 🧩 【サイズ・並びの調整エリア】各ブロックのスタイル */
+        /* 各ブロックの基本デザイン */
+        .block-box { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.3s ease; }
         
-        /* 【左側】公式リンク枠 */
-        .left-menu {
-            flex: 1; /* 横幅の比率（数字を大きくすると広がります） */
-            order: 1; /* ★画面に表示される順番（1が一番最初・一番上） */
-            background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 12px;
-            display: flex; flex-direction: column; gap: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-        .official-link {
-            background-color: rgba(30, 41, 59, 0.9); color: #38bdf8; text-decoration: none;
-            padding: 12px; border-radius: 6px; font-weight: bold; text-align: center; border: 1px solid #0284c7;
-        }
+        #leftMenuBlock { border-top: 4px solid #0284c7; }
+        #centerContentBlock { border-top: 4px solid #ef4444; }
+        #rightSidebarBlock { border-top: 4px solid #f59e0b; }
 
-        /* 【中央】メイン・最新情報枠 */
-        .center-content {
-            flex: 2; /* 中央を少し太く（比率2） */
-            order: 2; /* 2番目に表示 */
-            display: flex; flex-direction: column; gap: 20px;
-        }
-        .notice-board {
-            background: #fff; border-left: 5px solid #ef4444; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
-        .notice-item { padding: 8px; background: #fef2f2; border-radius: 6px; font-size: 0.9em; }
-        .notice-date { font-weight: bold; color: #ef4444; margin-right: 10px; }
-        .article-area { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
-
-        /* 【右側】カレンダー＆ガチャ情報枠 */
-        .right-sidebar {
-            flex: 1.2; /* 比率1.2 */
-            order: 3; /* 3番目に表示 */
-            display: flex; flex-direction: column; gap: 20px;
-        }
-        .calendar-area { background: white; padding: 15px; border-radius: 12px; border-top: 5px solid #0284c7; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+        .official-link { display:block; background-color: rgba(30, 41, 59, 0.9); color: #38bdf8; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: bold; text-align: center; border: 1px solid #0284c7; margin-bottom: 10px; }
+        .notice-board { background: #fef2f2; border-left: 5px solid #ef4444; padding: 10px; border-radius: 6px; margin-bottom: 15px; }
         .calendar-box { border: 2px dashed #cbd5e1; padding: 20px; text-align: center; color: #64748b; border-radius: 8px; font-weight: bold; }
-        .gacha-area { background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 12px; border-left: 5px solid #f59e0b; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         .info-list { list-style: none; padding: 0; margin: 0; font-size: 0.9em; }
         .info-list li { padding: 8px 0; border-bottom: 1px solid #e2e8f0; }
         .date-badge { background-color: #f59e0b; color: white; padding: 2px 6px; border-radius: 4px; margin-right: 5px; font-size: 0.8em; }
+
+        /* 🛠️ 【新設】画面下部に固定されるスリムな管理人用レイアウトコントローラー */
+        .layout-controller {
+            position: fixed; bottom: 0; left: 5%; right: 5%; width: 90%;
+            background: rgba(15, 23, 42, 0.95); color: white; padding: 8px 12px;
+            border-radius: 10px 10px 0 0; z-index: 1000; font-size: 0.8em;
+            display: flex; flex-direction: column; gap: 6px; box-sizing: border-box;
+        }
+        .ctrl-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .ctrl-group { display: flex; align-items: center; gap: 10px; }
+        .ctrl-btn { background: #0284c7; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-weight: bold; cursor: pointer; }
+        .ctrl-btn:hover { background: #0369a1; }
+        input[type="range"] { width: 80px; accent-color: #0284c7; }
     </style>
 </head>
 <body>
@@ -91,59 +56,94 @@
         <h1>デュエマシティ・アーカイブ</h1>
         <p>デュエプレ最新情報＆コミュニティ（非公式ファンサイト）</p>
         <div class="nav-container">
-            <!-- リンクの繋ぎミスを防ぐため、シンプルなファイル名（相対パス）に固定 -->
             <a href="index.html" class="nav-link">トップページ</a>
             <a href="balance.html" class="nav-link">能力調整まとめ</a>
             <a href="bbs.html" class="nav-link">コミュニティ掲示板</a>
         </div>
     </header>
 
-    <div class="main-container">
+    <!-- メイン容器 -->
+    <div class="main-container" id="mainContainer">
         
         <!-- 【左側ブロック】公式リンク -->
-        <nav class="left-menu">
-            <div>
-                <a href="https://takaratomy.co.jp" target="_blank" class="official-link">🌐 公式カードリスト ↗</a>
-                <p style="font-size: 0.8em; color: #64748b; margin: 5px 0 0 2px;">※別タブで開きます</p>
-            </div>
-            <div>
-                <a href="https://takaratomy.co.jp" target="_blank" class="official-link">❓ 公式Q&A ↗</a>
-            </div>
+        <nav class="block-box" id="leftMenuBlock" style="flex: 1; order: 1;">
+            <h3 style="margin-top:0; font-size:1.1em; color:#0284c7;">🔗 公式リンク</h3>
+            <a href="https://takaratomy.co.jp" target="_blank" class="official-link">公式カードリスト ↗</a>
+            <a href="https://takaratomy.co.jp" target="_blank" class="official-link">公式Q&A ↗</a>
         </nav>
 
         <!-- 【中央ブロック】最新通知＆挨拶 -->
-        <div class="center-content">
-            <section class="notice-board">
-                <h3 style="margin-top: 0; font-size: 1.1em;">🔔 最新アップデート・通知</h3>
-                <div class="notice-item">
-                    <span class="notice-date">2026/09/17</span>【メンテナンス】次回アップデート時の能力調整アナウンスが入りました！
-                </div>
-            </section>
-
-            <main class="article-area">
-                <h2 style="margin-top:0; font-size: 1.3em;">デュエマシティ・アーカイブへようこそ</h2>
-                <p style="font-size: 0.95em; line-height: 1.6;">このサイトは、デュエプレの歴史や運営アナウンスを分かりやすくストックし、プレイヤー同士の交流を深めるための非公式ファンサイトです。</p>
-            </main>
+        <div class="block-box" id="centerContentBlock" style="flex: 2; order: 2;">
+            <div class="notice-board">
+                <h4 style="margin-top: 0; color:#ef4444;">🔔 最新アップデート</h4>
+                <div style="font-size: 0.9em;"><span style="font-weight:bold;">2026/09/17</span> 能力調整アナウンスを公開！</div>
+            </div>
+            <h2 style="margin-top:0; font-size: 1.3em;">デュエマシティ・アーカイブへようこそ</h2>
+            <p style="font-size: 0.9em; line-height: 1.5;">デュエプレの歴史をストックし、決闘者が集う非公式ファンサイトです。</p>
         </div>
 
         <!-- 【右側ブロック】カレンダー＆ガチャ -->
-        <div class="right-sidebar">
-            <section class="calendar-area">
-                <h3 style="margin-top: 0; font-size: 1.1em;">📅 スケジュールカレンダー</h3>
-                <div class="calendar-box">
-                    [ イベント期間の<br>カレンダー表エリア ]
-                </div>
-            </section>
-
-            <section class="gacha-area">
-                <h3 style="margin-top: 0; font-size: 1.1em;">🚀 最新ガチャ実装日</h3>
-                <ul class="info-list">
-                    <li><span class="date-badge">NEW</span> 2026/09/XX<br>第XX弾カードパック</li>
-                </ul>
-            </section>
+        <div class="block-box" id="rightSidebarBlock" style="flex: 1.2; order: 3;">
+            <h3 style="margin-top:0; font-size:1.1em; color:#f59e0b;">📅 スケジュール</h3>
+            <div class="calendar-box">[ カレンダーエリア ]</div>
+            <h3 style="font-size:1.1em; color:#f59e0b; margin-top:15px;">🚀 ガチャ日</h3>
+            <ul class="info-list">
+                <li><span class="date-badge">NEW</span> 21弾カードパック</li>
+            </ul>
         </div>
 
     </div>
 
+    <!-- 🛡️ 管理人専用レイアウトコントローラー（画面上に直接表示されます） -->
+    <div class="layout-controller">
+        <div class="ctrl-row">
+            <span style="font-weight:bold; color:#38bdf8;">🛠️ 管理人レイアウト調整機能</span>
+            <span style="font-size:0.8em; color:#94a3b8;">※変更はブラウザを閉じるとリセットされます</span>
+        </div>
+        
+        <!-- サイズ調整用のスライダー -->
+        <div class="ctrl-row">
+            <div class="ctrl-group">
+                <span>左枠幅:</span>
+                <input type="range" min="1" max="4" step="0.1" value="1" oninput="changeSize('leftMenuBlock', this.value)">
+            </div>
+            <div class="ctrl-group">
+                <span>中央幅:</span>
+                <input type="range" min="1" max="4" step="0.1" value="2" oninput="changeSize('centerContentBlock', this.value)">
+            </div>
+            <div class="ctrl-group">
+                <span>右枠幅:</span>
+                <input type="range" min="1" max="4" step="0.1" value="1.2" oninput="changeSize('rightSidebarBlock', this.value)">
+            </div>
+        </div>
+
+        <!-- 並び順の入れ替えボタン -->
+        <div class="ctrl-row" style="border-top: 1px solid #334155; padding-top: 4px;">
+            <span>並び順の入れ替え:</span>
+            <div class="ctrl-group">
+                <button class="ctrl-btn" onclick="swapOrder('leftMenuBlock')">左を右へ</button>
+                <button class="ctrl-btn" onclick="swapOrder('centerContentBlock')">中央を右へ</button>
+                <button class="ctrl-btn" onclick="swapOrder('rightSidebarBlock')">右を左へ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 調整機能を動かすJavaScriptプログラム -->
+    <script>
+        // サイズ（幅の比率）をリアルタイムに変更する関数
+        function changeSize(blockId, val) {
+            document.getElementById(blockId).style.flex = val;
+        }
+
+        // 位置（表示順序）をローテーションで入れ替える関数
+        function swapOrder(blockId) {
+            const block = document.getElementById(blockId);
+            let currentOrder = parseInt(block.style.order) || 1;
+            
+            // 1➔2➔3➔1 と順番をローテーションさせる
+            currentOrder = currentOrder >= 3 ? 1 : currentOrder + 1;
+            block.style.order = currentOrder;
+        }
+    </script>
 </body>
 </html>
