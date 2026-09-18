@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>バグ・不具合報告 - デュエマシティ・アーカイブ</title>
+    <style>
+        body { margin: 0; font-family: sans-serif; background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%); color: #334155; padding-bottom: 110px; }
+        header { background-color: #0284c7; color: white; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
+        .guide-container { display: flex; align-items: flex-end; max-width: 800px; margin: 0 auto 10px auto; gap: 15px; height: 70px; }
+        .chick-character { width: 46px; height: 52px; background-color: #ffb74d; border-radius: 50% 50% 45% 45%; position: relative; box-shadow: 0 3px 6px rgba(0,0,0,0.15); flex-shrink: 0; margin-bottom: 8px; }
+        .chick-character::before { content: ''; position: absolute; top: 16px; left: 12px; width: 5px; height: 5px; background: #334155; border-radius: 50%; box-shadow: 18px 0 0 #334155; }
+        .chick-character::after { content: ''; position: absolute; top: 20px; left: 19px; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid #f57c00; }
+        .chick-wings-legs { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
+        .chick-wings-legs::before { content: ''; position: absolute; top: 24px; left: -4px; width: 6px; height: 14px; background-color: #ffa726; border-radius: 10px 0 0 10px; box-shadow: 48px 0 0 #ffa726; }
+        .chick-wings-legs::after { content: ''; position: absolute; bottom: -8px; left: 14px; width: 4px; height: 8px; background-color: #f57c00; border-radius: 2px; box-shadow: 14px 0 0 #f57c00; }
+        .speech-bubble { position: relative; background: #ffffff; color: #1e293b; border-radius: 10px; padding: 8px 14px; font-size: 0.85em; font-weight: bold; box-shadow: 0 3px 6px rgba(0,0,0,0.1); border: 2px solid #ffb74d; margin-bottom: 12px; }
+        .speech-bubble::after { content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%); border-style: solid; border-width: 6px 10px 6px 0; border-color: transparent #ffffff transparent transparent; z-index: 2; }
+        .speech-bubble::before { content: ''; position: absolute; left: -13px; top: 50%; transform: translateY(-50%); border-style: solid; border-width: 7px 11px 7px 0; border-color: transparent #ffb74d transparent transparent; z-index: 1; }
+        .header-main { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .header-main h1 { margin: 0; font-size: 1.5em; }
+        .back-link { background-color: rgba(15, 23, 42, 0.85); color: #f8fafc; text-decoration: none; padding: 8px 15px; border-radius: 6px; font-weight: bold; font-size: 0.9em; }
+        .thread-container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        .timeline-item { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; border-left: 5px solid #0284c7; }
+        .post-list { display: flex; flex-direction: column; gap: 15px; }
+        .post-item { background: white; padding: 15px 20px; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .post-meta { display: flex; justify-content: space-between; font-size: 0.85em; color: #64748b; border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; margin-bottom: 10px; }
+        .bottom-fixed-area { position: fixed; bottom: 0; left: 5%; right: 5%; width: 90%; background: white; box-shadow: 0 -4px 10px rgba(0,0,0,0.08); padding: 8px; z-index: 100; display: flex; flex-direction: column; gap: 6px; border-radius: 12px 12px 0 0; }
+        .reply-box-area { display: flex; gap: 8px; width: 100%; }
+        .reply-input { flex: 1; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.95em; height: 18px; }
+        .submit-btn { background-color: #0284c7; color: white; border: none; padding: 0 15px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.9em; }
+        .submit-btn:disabled { background-color: #94a3b8; cursor: not-allowed; }
+        .admin-panel { background-color: #fef2f2; border: 1px solid #fca5a5; padding: 4px 8px; border-radius: 4px; display: flex; gap: 6px; align-items: center; width: 100%; box-sizing: border-box; }
+        .admin-label { font-size: 0.75em; color: #991b1b; font-weight: bold; white-space: nowrap; }
+        .admin-input { padding: 4px; border: 1px solid #fca5a5; border-radius: 4px; font-size: 0.8em; flex: 1; min-width: 60px; height: 14px; }
+        .admin-action-btn { background-color: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold; cursor: pointer; white-space: nowrap; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="guide-container">
+            <div class="chick-character"><div class="chick-wings-legs"></div></div>
+            <div class="speech-bubble">ここは皆さんがバグや不具合の報告をする部屋ですよ〜</div>
+        </div>
+        <div class="header-main">
+            <h1>⚠️ 不具合報告掲示板</h1>
+            <a href="bbs.html" class="back-link">← 掲示板一覧へ</a>
+        </div>
+    </header>
+    <div class="thread-container">
+        <div class="timeline-item"><h2>ゲーム内挙動・不具合報告スレッド</h2></div>
+        <div class="post-list" id="postListContainer"></div>
+    </div>
+    <div class="bottom-fixed-area">
+        <div class="reply-box-area">
+            <input type="text" id="messageInput" class="reply-input" placeholder="ここにメッセージを入力">
+            <button type="button" id="submitBtn" class="submit-btn" onclick="addComment()">送信</button>
+        </div>
+        <div class="admin-panel">
+            <span class="admin-label">🛡️ 規制:</span>
+            <input type="text" id="targetIdInput" class="admin-input" value="USER-XXX" placeholder="対象ID">
+            <input type="password" id="passwordInput" class="admin-input" placeholder="パス（1）">
+            <button class="admin-action-btn" onclick="executeBlock()">禁止する</button>
+        </div>
+    </div>
+    <script>
+        const currentThreadId = "static_bug";
+        window.onload = function() {
+            loadComments();
+            document.getElementById("messageInput").addEventListener("keypress", function(e) {
+                if (e.key === "Enter") { addComment(); }
+            });
+        };
+        function addComment() {
+            const input = document.getElementById("messageInput");
+            const text = input.value.trim();
+            if (text === "") return;
+            const today = new Date();
+            const timeStr = today.getFullYear() + "/" + (today.getMonth()+1) + "/" + today.getDate() + " " + today.getHours().toString().padStart(2,'0') + ":" + today.getMinutes().toString().padStart(2,'0');
+            const newComment = { name: "名無しの決闘者", date: timeStr, content: text };
+            let comments = JSON.parse(localStorage.getItem("comments_" + currentThreadId)) || [];
+            comments.push(newComment);
+            localStorage.setItem("comments_" + currentThreadId, JSON.stringify(comments));
+            input.value = "";
+            loadComments();
+        }
+        function loadComments() {
+            const container = document.getElementById("postListContainer");
+            let comments = JSON.parse(localStorage.getItem("comments_" + currentThreadId)) || [];
+            if (comments.length === 0) {
+                comments = [{ name: "管理人", date: "本日", content: "「カードが意図しない挙動をした」「接続エラーが頻発する」など、不具合と思われる現象の情報共有はこちらへお願いします。" }];
+            }
+            container.innerHTML = "";
+            comments.forEach(function(c, index) {
+                const item = document.createElement("div");
+                item.className = "post-item";
+                item.innerHTML = `<div class="post-meta"><div><span style="color:#0284c7;font-weight:bold;">&gt;&gt;${index+1}</span> <b>${c.name}</b></div><div>${c.date}</div></div><div style="white-space:pre-wrap;font-size:0.9em;">${c.content}</div>`;
+                container.appendChild(item);
+            });
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+        const ADMIN_PASSWORD = "1";
+        function executeBlock() {
+            const targetId = document.getElementById("targetIdInput").value;
+            const password = document.getElementById("passwordInput").value;
+            if (password === ADMIN_PASSWORD) {
+                alert("【認証成功】\nユーザー「" + targetId + "」の書き込みを禁止しました。");
+                document.getElementById("submitBtn").disabled = true;
+                document.getElementById("messageInput").disabled = true;
+            } else { alert("【エラー】パスワードが違います。"); }
+        }
+    </script>
+</body>
+</html>
